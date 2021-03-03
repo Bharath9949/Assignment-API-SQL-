@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "InterestRate")
@@ -13,9 +14,11 @@ public class InterestRate {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO) 
 	private long id;
+	
 	private long fromAmount;
 	private long toAmount;
 	private int fromYears;
+	@Min(value=1)
 	private int toYears;
 	private int interestRate;
 	public long getId() {

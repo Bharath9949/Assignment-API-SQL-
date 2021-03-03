@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Customers")
@@ -13,10 +16,14 @@ public class Customer {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO) 
 	private long id;
+	@NotEmpty(message = "phone number should not be null")
 	private String phoneNumber;
+	@NotEmpty(message = "name should not be null")
 	private String name;
 	private String mailId;
+	@Min(value = 1, message = "principal amount should not be null")
 	private long principalAmount;
+	@Min(value = 1, message = "years should not be null")
 	private int years;
 	private long interestAmount;
 	private long totalAmount;

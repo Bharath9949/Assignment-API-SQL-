@@ -1,5 +1,7 @@
 package com.psglobal.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,24 +28,11 @@ public class CustomerController {
 	private InterestRateRepository interestRateRepository;
 	
 	@PostMapping("/customers")
-    public String saveCustomerDetails(@RequestBody Customer customer) {
+    public String saveCustomerDetails(@Valid @RequestBody Customer customer) {
         customerRepository.save(customer);
         return "Customer Details Added";
     }
 	
-	@PostMapping("/customers/calculateInterest")
-	public Customer calculateInterst(@RequestBody Customer customer) {
-		InterestRate ir = interestRateRepository.getInterestRate(customer.getPrincipalAmount(), customer.getYears());
-		long interestAmount = customer.getYears() * customer.getPrincipalAmount() * ir.getInterestRate() /100;
-		long totalAmount = interestAmount + customer.getPrincipalAmount();
-		Customer customer1 = new Customer();
-		customer1.setName(customer.getName());
-		customer1.setMailId(customer.getMailId());
-		customer1.setInterestAmount(interestAmount);
-		customer1.setTotalAmount(totalAmount);
-		customer1.setPhoneNumber(customer.getPhoneNumber());
-		return  customer1;
-	}
 	
 	@GetMapping("/customers/calculateInterest")
 	public Customer calculateInterst(@RequestParam("principalAmount") long principalAmount,  @RequestParam("years") int years) {
@@ -56,10 +45,5 @@ public class CustomerController {
 		return  customer1;
 	}
 	
-	
-	
-	//@RequestMapping(method=RequestMethod.PUT, value="/customers")
-	//void addCustomer(@RequestBody Customer customer) {
-      //  customerRepository.save(customer);
-    //}
+
 }
