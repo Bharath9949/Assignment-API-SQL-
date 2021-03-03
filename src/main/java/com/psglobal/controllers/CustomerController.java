@@ -42,6 +42,7 @@ public class CustomerController {
 		Customer customer1 = new Customer();
 		customer1.setInterestAmount(interestAmount);
 		customer1.setTotalAmount(totalAmount);
+		customer1.setInterestRate(ir.getInterestRate());
 		return  customer1;
 	}
 	

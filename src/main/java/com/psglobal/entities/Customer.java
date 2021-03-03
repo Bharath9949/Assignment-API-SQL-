@@ -25,6 +25,7 @@ public class Customer {
 	private long principalAmount;
 	@Min(value = 1, message = "years should not be null")
 	private int years;
+	private int interestRate;
 	private long interestAmount;
 	private long totalAmount;
 	
@@ -63,6 +64,12 @@ public class Customer {
 	}
 	public void setYears(int years) {
 		this.years = years;
+	}
+	public int getInterestRate() {
+		return interestRate;
+	}
+	public void setInterestRate(int interestRate) {
+		this.interestRate = interestRate;
 	}
 	public long getInterestAmount() {
 		return interestAmount;
