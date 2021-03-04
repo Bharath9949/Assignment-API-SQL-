@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.psglobal.entities.Customer;
 import com.psglobal.entities.InterestRate;
+import com.psglobal.entities.Status;
 import com.psglobal.repositories.CustomerRepository;
 import com.psglobal.repositories.InterestRateRepository;
 
@@ -28,9 +29,12 @@ public class CustomerController {
 	private InterestRateRepository interestRateRepository;
 	
 	@PostMapping("/customers")
-    public String saveCustomerDetails(@Valid @RequestBody Customer customer) {
+    public Status saveCustomerDetails(@Valid @RequestBody Customer customer) {
         customerRepository.save(customer);
-        return "Customer Details Added";
+        Status status = new Status();
+        status.setStatus("success");
+        status.setMessage("Customer Details Added");
+        return status;
     }
 	
 	
